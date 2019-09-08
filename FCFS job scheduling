@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#include<stdlib.h>
+#define size 3
+void enqueue(int[],int *,int *,int *);
+void dequeue(int *,int *);
+void display(int[],int*,int *);
+void main()
+{
+int choice,queue[size],front=-1,rear=-1,count=0;
+clrscr();
+do
+{
+printf("enter the choice :\n 1 .fresher \n 2.interview completed \n 3 to display the applicants\n any other number to exit\n ");
+scanf("%d",&choice);
+switch(choice)
+{
+ case 1:
+ enqueue(queue,&front,&rear,&count);
+ break;
+ case 2:
+ dequeue(&front,&rear);
+ break;
+ case 3 :
+ display(queue,&front,&rear);
+ break;
+}
+}while(choice==1||choice==2||choice==3);
+
+getch();
+}
+void enqueue(int queue[size],int*front,int *rear,int*count)
+{
+int ele;
+if (((*rear)==size-1 && (*front)==0)||((*rear)==(*front)-1))
+printf ("queue overflow\n");
+else
+{
+if (*rear==-1)
+*front=0,*rear=0,*count=1 ;
+else if(*rear==size-1)
+*rear=0;
+else
+(*rear)++;
+ele=(*count);
+(*count)++;
+queue[(*rear)]=ele;
+printf("the token number for your job interview is %d\n",ele);
+}
+}
+void dequeue(int *front, int *rear)
+{
+if (*front==-1)
+printf ("the interviewer is free\n");
+else
+{
+printf("thank you for attending interview\n");
+if(*front==*rear)
+*front=-1,*rear=-1;
+else if(*front==size-1)
+*front=0;
+else
+(*front)++;
+}
+}
